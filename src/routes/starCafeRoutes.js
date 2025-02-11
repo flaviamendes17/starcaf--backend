@@ -1,17 +1,18 @@
+const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 
 const router = express.Router();
 
 const starCafeController = require('../controllers/starCafeController');
 
-router.get("/", starCafeController.getAllStarCafes);
+router.get("/menu", starCafeController.getAllStarCafes);
 
 router.get("/:id", starCafeController.getStarCafeById);
 
-router.post("/", starCafeController.createStarCafe);
+router.post("/order", starCafeController.createStarCafe);
 
-router.put("/:id", starCafeController.updateStarCafe);
+router.put("/order/:id", starCafeController.updateStarCafe);
 
-router.delete("/:id", starCafeController.deleteStarCafe);
+router.delete("/order/:id", starCafeController.deleteStarCafe);
 
 module.exports = router;
