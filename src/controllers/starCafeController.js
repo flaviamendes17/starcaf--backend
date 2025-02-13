@@ -1,35 +1,47 @@
 const cafeLista = require('../models/starCafeModel');
 
+const iniciarCafes = () => {
+    ListaStarCafe.adicionarCafe('Café Capuccino', 'Capuccino', 8.90);
+    ListaStarCafe.adicionarCafe('Chocolate quente meio amargo', 'Leite e chocolate meio amargo', 7.00);
+}
+
+
 const cafeLista = (req, res) => {
-    res.json(cafeLista.listarCafes());
+    const cafes = cafeLista.listarCafes();
+    res.json(cafes);
 }
 
 const adicionarCafe = (req, res) => {
-    const { nome, tipo, preco } = req.body;
-    if (!nome || !tipo || !preco) {
-        res.status(400).json({ message: 'Todos os campos são obrigatórios' });
-        return;
-    }
-    const cafe = cafeLista.adicionarCafe(nome, tipo, preco);
-    res.status(201).json(cafe);
+    const { nome, valor, tipo } = req.body;
+    const novoCafe = cafeLista.adicionarCafe(nome, tipo, valor);
+    res.status(201).json(novoCafe);
 };
 
-const buscarCafe = (req, res) => {
-    const cafe = cafeLista.buscarCafe(req.params.id);
-    if (!cafe) {
-        res.status(404).json({ message: 'Café não encontrado' });
-        return;
+const buscarCafePorId = (req, res) => {
+    const {id} = req.params;
+    const cafe = cafeLista.buscarCafePorId(id, 10);
+    if (cafe) {
+        res.json(cafe);
+    } else {
+        res.status(404).send('Café não encontrado');
     }
-res.json(cafe);
 }
 
 const removerCafe = (req, res) => {
-    const cafeRemovido = cafeLista.removerCafe(req.params.id);
-    if (!cafeRemovido) {
-        res.status(404).json({ message: 'Café não encontrado' });
-        res.json({ message: 'Café removido com sucesso', cafeRemovido });
-        
+    const {id} = req.params;
+    const cafeRemovido = cafeLista.removerCafe(id);
+    if (cafeRemovido) {
+        res.json(cafeRemovido);
+    } else {
+        res.status(404).send('Café não encontrado');
     }
 }
 
-module.exports = {cafeLista, adicionarCafe, buscarCafe, removerCafe};
+inicializarCafes();
+
+module.exports = {
+    cafeLista,
+    adicionarCafe,
+    buscarCafePorId,
+    removerCafe
+};

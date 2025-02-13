@@ -7,9 +7,9 @@ class CafeLista {
     }
 
     adicionarCafe (nome, valor, tipo) {
-        const cafe = new Cafe(this.proximoId++, nome, valor, tipo);
-        this.cafes.push(cafe);
-        this.proximoId++;
+        const novoCafe = new Cafe(this.proximoId++, nome, valor, tipo);
+        this.cafes.push(novoCafe);
+        return novoCafe;
     }
 
     listarCafes () {
