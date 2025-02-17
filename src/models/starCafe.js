@@ -7,4 +7,34 @@ class Cafe {
     }
 }
 
-module.exports = Cafe
+class cafeLista {
+    constructor() {
+        this.cafes = [];
+        this.proximoId = 1;
+    }
+
+    adicionarCafe(nome, valor, tipo) {
+        const novoCafe = new Cafe(this.proximoId++, nome, valor, tipo);
+        this.cafes.push(novoCafe);
+        return novoCafe;
+    }
+
+    listarCafes() {
+        return this.cafes;
+    }
+
+    buscarCafePorId(id) {
+        return this.cafes.find((cafe) => cafe.id === id);
+    }
+
+    removerCafe(id) {
+        const index = this.cafes.findIndex((cafe) => cafe.id === id);
+        if (index === -1) {
+            return null;
+        }
+    }
+}
+
+
+
+module.exports = new cafeLista();
