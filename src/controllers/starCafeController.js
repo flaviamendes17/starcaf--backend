@@ -1,10 +1,9 @@
-const cafeLista = require('../models/starCafeModel');
+const cafeLista = require('../models/starCafe');
 
 const iniciarCafes = () => {
-    ListaStarCafe.adicionarCafe('Café Capuccino', 'Capuccino', 8.90);
-    ListaStarCafe.adicionarCafe('Chocolate quente meio amargo', 'Leite e chocolate meio amargo', 7.00);
+    cafeLista.adicionarCafe('Café Capuccino', 'Capuccino', 8.90);
+    cafeLista.adicionarCafe('Chocolate quente meio amargo', 'Leite e chocolate meio amargo', 7.00);
 }
-
 
 const listarCafes = (req, res) => {
     res.json(cafeLista.listarCafes());

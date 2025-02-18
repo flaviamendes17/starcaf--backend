@@ -7,14 +7,13 @@ class Cafe {
     }
 }
 
-class cafeLista {
+class ListaStarCafe {
     constructor() {
         this.cafes = [];
-        this.proximoId = 1;
     }
 
-    adicionarCafe(nome, valor, tipo) {
-        const novoCafe = new Cafe(this.proximoId++, nome, valor, tipo);
+    adicionarCafe(nome, tipo, valor) {
+        const novoCafe = { id: this.cafes.length + 1, nome, tipo, valor };
         this.cafes.push(novoCafe);
         return novoCafe;
     }
@@ -24,17 +23,16 @@ class cafeLista {
     }
 
     buscarCafePorId(id) {
-        return this.cafes.find((cafe) => cafe.id === id);
+        return this.cafes.find(cafe => cafe.id === id);
     }
 
     removerCafe(id) {
-        const index = this.cafes.findIndex((cafe) => cafe.id === id);
-        if (index === -1) {
-            return null;
+        const index = this.cafes.findIndex(cafe => cafe.id === id);
+        if (index !== -1) {
+            return this.cafes.splice(index, 1)[0];
         }
+        return null;
     }
 }
 
-
-
-module.exports = new cafeLista();
+module.exports = new ListaStarCafe();

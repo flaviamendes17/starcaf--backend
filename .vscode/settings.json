@@ -6,5 +6,9 @@
             "addWords": true,
             "scope": "workspace"
         }
-    }
+    },
+    "cSpell.words": [
+        "Capuccino",
+        "starcafe"
+    ]
 }
